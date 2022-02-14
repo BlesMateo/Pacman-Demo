@@ -1,21 +1,42 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
-/*Monitor key input from the player*/
-window.addEventListener("keydown", controlArrow);
-
 /*Event listener function for movement input*/
-function controlArrow(e) {
-  const keyArrow = e.keyCode;
-  const up = w;
-  const down = s;
-  const right = a;
-  const left = d;
+const useCharacterControls = () => {
+  const { up, down, left, right } = useCharacterControls();
 
-  if (keyArrow === up) window.appState.player.direction = "up";
-  if (keyArrow === down) window.appState.player.direction = "down";
-  if (keyArrow === right) window.appState.player.direction = "right";
-  if (keyArrow === left) window.appState.player.direction = "left";
-}
+  const keys = {
+    KeyW: "up",
+    KeyS: "down",
+    KeyA: "left",
+    KeyD: "right",
+  };
 
-export default App;
+  const movementKey = (key) => keys[key];
+
+  const [movement, setMovement] = useState({
+    up: false,
+    down: false,
+    left: false,
+    right: false,
+  });
+
+  useEffect(() => {
+    const handleMoveUp = (e) => {
+      setMovement((m) => ({ ...m, [movementKey(e.code)]: true }));
+    };
+    const handleMoveDown = (e) => {
+      setMovement((m) => ({ ...m, [movementKey(e.code)]: false }));
+    };
+    document.addEventListener("keydown", handleMoveDown);
+    document.addEventListener("keyup", handleMoveUp);
+    return () => {
+      document.removeEventListener("keydown", handleMoveDown);
+      document.removeEventListener("keyup", handleMoveUp);
+    };
+  }, []);
+
+  return movement;
+};
+
+export default useCharacterControls;
