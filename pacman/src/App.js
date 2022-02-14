@@ -1,26 +1,16 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/*Monitor key input from the player*/
+window.addEventListener("keydown", controlArrow);
+
+/*Event listener function for movement input*/
+function controlArrow(e) {
+  const keyArrow = e.keyCode;
+  const up = 38;
+  const down = 40;
+  const right = 39;
+  const left = 37;
 }
 
 export default App;
