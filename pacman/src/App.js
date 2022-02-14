@@ -7,10 +7,15 @@ window.addEventListener("keydown", controlArrow);
 /*Event listener function for movement input*/
 function controlArrow(e) {
   const keyArrow = e.keyCode;
-  const up = 38;
-  const down = 40;
-  const right = 39;
-  const left = 37;
+  const up = w;
+  const down = s;
+  const right = a;
+  const left = d;
+
+  if (keyArrow === up) window.appState.player.direction = "up";
+  if (keyArrow === down) window.appState.player.direction = "down";
+  if (keyArrow === right) window.appState.player.direction = "right";
+  if (keyArrow === left) window.appState.player.direction = "left";
 }
 
 export default App;
